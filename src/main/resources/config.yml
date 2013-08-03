@@ -1,4 +1,4 @@
-# ResistanceChange by Squidicuz
+# ResistanceChanger by Squidicuz
 # Ported from ObsidianDestroyer
 # For information visit http://dev.bukkit.org/server-mods/ObsidianDestroyer
 
@@ -153,7 +153,7 @@ HandledBlocks:
       Withers: false
   EnderChest:
     BlockID: 130
-    Durability5
+    Durability:
       Amount: 4
       Enabled: true
       ChanceToDrop: 0.6
