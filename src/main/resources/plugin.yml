@@ -1,0 +1,12 @@
+name: ResistanceChanger
+main: net.sqdmc.resistancechanger.ResistanceChanger
+version: ${project.version}
+authors: [squidicuz]
+softdepend: [Factions, Towny, WorldGuard]
+
+commands:
+    resistancechanger:
+        description: ResistanceChanger
+        usage: |
+               /<command>
+        aliases: [rc]
