@@ -77,12 +77,12 @@
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
-            <version>1.6.2-R0.1-SNAPSHOT</version>
+            <version>LATEST</version>
         </dependency>
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>craftbukkit</artifactId>
-            <version>1.6.2-R0.1-SNAPSHOT</version><!--$NO-MVN-MAN-VER$-->
+            <version>LATEST</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
         <dependency>
             <groupId>com.massivecraft</groupId>

@@ -90,7 +90,7 @@ public final class RCCommands implements CommandExecutor {
     }
 
     private void showHelp(Player sender) {
-    	sender.sendMessage(ChatColor.YELLOW + "-------------  " + ChatColor.GOLD + "" + ChatColor.UNDERLINE + "Resistance Changer" + ChatColor.RESET + ChatColor.YELLOW + "  -------------");
+        sender.sendMessage(ChatColor.YELLOW + "-------------  " + ChatColor.GOLD + "" + ChatColor.UNDERLINE + "Resistance Changer" + ChatColor.RESET + ChatColor.YELLOW + "  -------------");
         sender.sendMessage(ChatColor.YELLOW + "Available commands:");
         sender.sendMessage(ChatColor.AQUA + "/rc version - " + ChatColor.GOLD + " gives version and shows commands.");
         sender.sendMessage(ChatColor.AQUA + "/rc reload - " + ChatColor.GOLD + " reloads the plugin's config file");
@@ -121,19 +121,19 @@ public final class RCCommands implements CommandExecutor {
     }
 
     private void resetDurability(Player sender) {
-        BlockManager.getInstance().setObsidianDurability(new HashMap<Integer, Integer>());
+        /*BlockManager.getInstance().setObsidianDurability(new HashMap<Integer, Integer>());
 
         Set<Integer> set = BlockManager.getInstance().getObsidianTimer().keySet();
 
         for (Integer i : set) {
-            Timer t = BlockManager.getInstance().getObsidianTimer().get(i);
+            BlockTimer t = BlockManager.getInstance().getObsidianTimer().get(i);
 
             if (t != null) {
                 t.cancel();
             }
         }
 
-        BlockManager.getInstance().setObsidianTimer(new HashMap<Integer, Timer>());
+        BlockManager.getInstance().setObsidianTimer(new HashMap<Integer, Timer>());*/
 
         ResistanceChanger.LOG.info("'" + sender.getName() + "' requested reset of all Block durabilities");
         sender.sendMessage(ChatColor.GREEN + "Reset all Block durabilities!");

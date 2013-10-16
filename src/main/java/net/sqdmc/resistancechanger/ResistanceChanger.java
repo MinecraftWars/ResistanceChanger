@@ -70,6 +70,7 @@ public final class ResistanceChanger extends JavaPlugin {
 
         // Load durabilities of hit blocks
         BlockManager.getInstance().setObsidianDurability(RCConfig.getInstance().loadDurabilityFromFile());
+        new ResetRunnable().start();
 
         checkFactionsHook();
         checkTownyHook();

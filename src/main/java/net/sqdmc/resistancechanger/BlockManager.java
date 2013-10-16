@@ -1,6 +1,8 @@
 package net.sqdmc.resistancechanger;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
@@ -15,7 +17,7 @@ import org.bukkit.inventory.ItemStack;
 public class BlockManager {
     private static BlockManager instance;
     private HashMap<Integer, Integer> durability = new HashMap<Integer, Integer>();
-    private HashMap<Integer, Timer> timer = new HashMap<Integer, Timer>();
+    private HashMap<Integer, BlockTimer> timer = new HashMap<Integer, BlockTimer>();
     private Map<Integer, DuraBlock> rBlocks = new HashMap<Integer, DuraBlock>();
 
     private boolean displayedWarning = false;
@@ -146,16 +148,28 @@ public class BlockManager {
 
         if (getDurabilityResetTimerEnabled(key)) {
             if (timer.get(representation) != null) {
-                timer.get(representation).cancel();
+                timer.remove(representation);
             }
+        }
+    }
 
-            timer.remove(representation);
+    public void checkDurability() {
+        //ResistanceChanger.LOG.info("BlockTimers: " + timer.size());
+        List<Integer> timersExpired = new ArrayList<Integer>();
+        for (Entry<Integer, BlockTimer> blockTimer : timer.entrySet()) {
+            if (System.currentTimeMillis() > blockTimer.getValue().getTimeToLive()) {
+                timersExpired.add(blockTimer.getKey());
+            }
+        }
+        for (Integer timerExpired : timersExpired) {
+            timer.remove(timerExpired);
+            durability.remove(timerExpired);
         }
     }
 
     private void startNewTimer(Integer representation, int key) {
         if (timer.get(representation) != null) {
-            timer.get(representation).cancel();
+            timer.remove(representation);
         }
 
         // This should always be on be on in this case.
@@ -175,10 +189,7 @@ public class BlockManager {
             }
         }
 
-        Timer t = new Timer();
-        t.schedule(new RCTimerTask(ResistanceChanger.getInstance(), representation), getDurabilityResetTime(key));
-
-        timer.put(representation, t);
+        timer.put(representation, new BlockTimer(getDurabilityResetTime(key)));
     }
 
     /**
@@ -208,7 +219,7 @@ public class BlockManager {
      * 
      * @return the HashMap containing all saved durability timers
      */
-    public HashMap<Integer, Timer> getObsidianTimer() {
+    public HashMap<Integer, BlockTimer> getObsidianTimer() {
         return timer;
     }
 
@@ -217,7 +228,7 @@ public class BlockManager {
      * 
      * @param map containing all saved durability timers
      */
-    public void setObsidianTimer(HashMap<Integer, Timer> map) {
+    public void setObsidianTimer(HashMap<Integer, BlockTimer> map) {
         if (map == null) {
             return;
         }
